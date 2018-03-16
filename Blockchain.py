@@ -1,5 +1,6 @@
 from typing import List
 
+import ProofOfWork
 import Transaction
 import hashlib
 import json
@@ -16,6 +17,7 @@ class Blockchain:
 
         self.chain: List[Block] = []
         self.current_transactions = []
+        self.proof_of_work = ProofOfWork()
 
         # Genesis block
         self.new_block(previous_hash = 1, proof = 100)
