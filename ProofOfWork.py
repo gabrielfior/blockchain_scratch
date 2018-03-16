@@ -3,6 +3,7 @@ import hashlib
 
 class ProofOfWork:
 
+
     def proof_of_work(self, last_proof : str) -> int:
         """
         Simple Proof of Work algorithm:

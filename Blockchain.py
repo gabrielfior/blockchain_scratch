@@ -1,6 +1,6 @@
 from typing import List
 
-import ProofOfWork
+from ProofOfWork import ProofOfWork
 import Transaction
 import hashlib
 import json
@@ -15,9 +15,10 @@ from Block import Block
 class Blockchain:
     def __init__(self):
 
+
         self.chain: List[Block] = []
         self.current_transactions = []
-        self.proof_of_work = ProofOfWork()
+        self.Proof_of_Work = ProofOfWork()
 
         # Genesis block
         self.new_block(previous_hash = 1, proof = 100)
@@ -59,7 +60,8 @@ class Blockchain:
         :param block: Block object
         :return: calculated hash of the ordered block (to avoid inconsistencies)
         '''
-        block_string = json.dumps(block, sort_keys=True).encode()
+        # TODO - write test
+        block_string = json.dumps(block.toJson(), sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
     
     @property

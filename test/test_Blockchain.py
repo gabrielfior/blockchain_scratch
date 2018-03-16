@@ -26,5 +26,6 @@ class Test_class:
 
 
     def test_last_block(self):
+        print("oi2")
         added_block = self.blockchain.new_block(proof=2)
         assert self.blockchain.last_block == added_block
