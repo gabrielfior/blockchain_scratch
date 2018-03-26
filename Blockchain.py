@@ -1,24 +1,21 @@
+import hashlib
+import json
+from time import time
 from typing import List
+from urllib.parse import urlparse
 
-from ProofOfWork import ProofOfWork
-import Transaction
-import hashlib
-import json
-from time import time
-import hashlib
-import json
-from time import time
 import Transaction
 from Block import Block
+from ProofOfWork import ProofOfWork
 
 
 class Blockchain:
     def __init__(self):
 
-
         self.chain: List[Block] = []
         self.current_transactions = []
         self.Proof_of_Work = ProofOfWork()
+        self.nodes = set()
 
         # Genesis block
         self.new_block(previous_hash = 1, proof = 100)
@@ -52,6 +49,17 @@ class Blockchain:
 
         self.current_transactions.append(transaction.__dict__)
         return self.last_block.index + 1
+
+    def register_node(self, address : str) -> None:
+        """
+        Add a new node to list of nodes.
+        :param address:  Address of node. Eg. 'http://192.168.0.5:5000
+        :return:
+        """
+
+        parsed_url = urlparse(address)
+        self.nodes.add(parsed_url.netloc)
+
 
     @staticmethod
     def hash(block : Block) -> str:
